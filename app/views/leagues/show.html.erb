@@ -1,0 +1,16 @@
+<% title @league.name %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @league.name %>
+</p>
+
+<% action_item(link_to 'Liga bearbeiten', edit_league_path(@league))%>
+<% action_item(link_to 'Liga löschen', @league, confirm: 'Are you sure?', method: :delete)%>
+
+<% breadcrump(link_to 'Ligen', leagues_path)%>
+
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>

@@ -1,0 +1,27 @@
+<% title 'Spiele' %>
+
+<table class="index_table">
+  <tr>
+    <th>Id</th>
+    <th>Datum</th>
+    <th>Liga</th>
+    <th>Gewinner</th>
+    <th>Erstellt von</th>
+    <th></th>
+  </tr>
+
+<% @matches.each do |match| %>
+  <tr class="<%= cycle 'odd', 'even' %>">
+    <td><%= link_to match.id, match %></td>
+    <td><%= match.date %></td>
+    <td><%= match.league.name %></td>
+    <td><%= match.winner ? match.winner.name : "Draw" %></td>
+    <td><%= match.creator.name %></td>
+    <td><%= link_to 'Edit', edit_match_path(match) %> <%= link_to 'Destroy', match, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% action_item(link_to 'Neues Spiel', new_match_path) %>

@@ -15,6 +15,9 @@ gem 'jquery-rails'
 gem 'capistrano'
 gem 'formtastic'
 
+# Authentication with devise
+gem 'devise'
+
 gem "rspec-rails", :group => [:test, :development]  
 group :test do  
   gem "mocha"

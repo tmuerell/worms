@@ -1,0 +1,21 @@
+<% title 'Ligen' %>
+
+<table class="index_table">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+<% @leagues.each do |league| %>
+  <tr class="<%= cycle 'odd','even' %>">
+    <td><%= link_to league.id, league %>
+    <td><%= league.name %></td>
+    <td><%= link_to 'Edit', edit_league_path(league) %> <%= link_to 'Destroy', league, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% action_item(link_to 'Neue Liga', new_league_path) %>

@@ -1,0 +1,75 @@
+<% title 'Tabelle' %>
+
+<div class="panel" id="ranking">
+  <h3><%= @league.name %></h3>
+  <div class="panel_contents">
+
+<table cellspacing="0" cellpadding="0" border="0">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Pl.</th>
+      <th>Name</th>
+      <th>Spiele</th>
+      <th>Punkte</th>
+      <th>Koeffizient</th>
+      <th>Siege</th>
+      <th>Unentschieden</th>
+      <th>Niederlagen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for r in @rankings %>
+    <tr class="odd">
+      <td><%= show_trend(r) %></td>
+      <td><%= r.place %>.</td>
+      <td><%= r.user.firstname %></td>
+      <td><%= r.matches %></td>
+      <td><%= r.points %></td>
+      <td><%= "%.4f" % r.coefficient %></td>
+      <td><%= r.wins %></td>
+      <td><%= r.draws %></td>
+      <td><%= r.losses %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>
+</div>
+
+<% if user_signed_in? %>
+<% content_for(:sidebar) do %>
+<div class="panel sidebar" id="ranking">
+  <h3>Ergebnis eintragen</h3>
+  <div class="panel_contents">
+    <%= form_tag create_result_path do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Teiln.</th>
+          <th>Gewinner</th>
+        </tr>
+      <thead>
+      <tbody>
+        <% for u in User.all %>
+          <tr>
+            <td><%= u.firstname %></td>
+            <td><%= check_box_tag 'participated[]', u.id %></td>
+            <td><%= radio_button_tag 'winner', u.id %></td>
+          </tr>
+        <% end %>
+          <tr>
+            <td>Draw</td>
+            <td></td>
+            <td><%= radio_button_tag 'winner', -1 %></td>
+          </tr>
+    </table>
+    <%= submit_tag "Eintragen" %>
+    <% end %>
+
+  </div>
+</div>
+
+<% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<% title 'Teilnahmen' %>
+
+<table class="index_table">
+  <tr>
+    <th>Id</th>
+    <th>Spieldatum</th>
+    <th>Spieler</th>
+    <th></th>
+  </tr>
+
+<% @attendances.each do |attendance| %>
+  <tr class="<%= cycle 'odd', 'even' %>">
+    <td><%= link_to attendance.id, attendance %></td>
+    <td><%= attendance.match.date %></td>
+    <td><%= attendance.user.name %></td>
+    <td><%= link_to 'Edit', edit_attendance_path(attendance) %> <%= link_to 'Destroy', attendance, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<% action_item(link_to 'Neue Teilnahme', new_attendance_path) %>

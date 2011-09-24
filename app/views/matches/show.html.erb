@@ -1,0 +1,34 @@
+<% title 'Spiel' %>
+
+<div class="panel">
+  <h3>Spieler</h3>
+  <div class="panel_contents">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for a in @match.attendances %>
+        <tr>
+          <td><%= a.user.name %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% content_for(:sidebar) do %>
+<div class="panel sidebar_section">
+  <h3>Spieldetails</h3>
+  <div class="panel_contents">
+    <%= attribute_table(@match, :date, :creator) %>
+  </div>
+</div>
+<% end %>
+
+
+<% action_item(link_to 'Spiel bearbeiten', edit_match_path(@match)) %>
+<% breadcrump(link_to 'Spiele', matches_path) %>

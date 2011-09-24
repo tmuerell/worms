@@ -1,4 +1,15 @@
 Worms::Application.routes.draw do
+  resources :attendances
+
+  resources :leagues
+  resources :matches
+  devise_for :users, :path => 'account'
+  resources :users
+  
+  match 'statistics/index(.:format)'
+  match 'statistics/create', :as => :create_result
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +59,7 @@ Worms::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'statistics#index'
 
   # See how all your routes lay out with "rake routes"
 

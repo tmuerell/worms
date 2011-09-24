@@ -6,9 +6,74 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
+<body class="logged_in">
+  <div id="wrapped">
+    <div id="header">
+      <h1 id="site_title"><%= link_to "Worms League", root_url %></h1>
+      <ul class="tabbed_navigation" id="tabs">
+        <% if user_signed_in? %>
+          <% if has_role?('admin') %>
+            <li class="<%= show_current('users') %>"><%= link_to "Benutzer", users_path %></li>
+            <li class="<%= show_current('leagues') %>"><%= link_to "Ligen", leagues_path %></li>
+            <li class="<%= show_current('matches') %>"><%= link_to "Spiele", matches_path %></li>
+            <li class="<%= show_current('attendances') %>"><%= link_to "Teilnahmen", attendances_path %></li>
+          <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+        <% end %>
+      </ul>
+      <p id="utility_nav"></p>
+    </div>
+    <div id="title_bar">
+      <span class="breadcrumb">
+        <% if breadcrumps? %>
+          <%= link_to "Home", root_url %>
+          <% breadcrumps.each do |b| %>
+            <span class="breadcrumb_sep">/</span>
+            <%= b %>
+          <% end %>
+        <% end %>
+      </span>
+      <h2 id="page_title"><%= yield :title %></h2>
+      <% if show_action_item? %>
+      <div class="action_items">
+        <span class="action_item">
+          <%= yield :action_item %>
+        </span>
+      </div>
+      <% end %>
+    </div>
+    <% if content_for?(:sidebar) %>
+      <div class="with_sidebar" id="active_admin_content">
+      <div id="main_content_wrapper">
+    <% else %>
+      <div class="without_sidebar" id="active_admin_content">
+    <% end %>
+      <div id="main_content">
+        <% if flash.keys.any? %>
+          <% flash.each do |type, message| %>
+            <%= content_tag :div, message, :class => "flash flash_#{type}" %>
+          <% end %>
+        <% end %>
+      
+        <%= yield %>
+      </div>
+      
+    <% if content_for?(:sidebar) %>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    <% end %>
+    </div>
+    <div id="footer">
+      <p>
+        Powered by
+        <a href="http://www.tmarts.de">TMarts</a>
+      </p>
+    </div>
+  </div>
 
 </body>
 </html>
