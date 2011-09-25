@@ -11,6 +11,10 @@ group :assets do
   gem 'uglifier'
 end
 
+group :production do
+  gem 'mysql2'
+end
+
 gem 'jquery-rails'
 gem 'capistrano'
 gem 'formtastic'
