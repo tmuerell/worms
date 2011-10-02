@@ -5,7 +5,7 @@ class Ranking
   attr_accessor :trend, :place, :user, :wins, :draws, :losses
   
   def attributes
-    ['trend', 'place', 'user', 'wins', 'draws', 'losses']
+    ['trend', 'place', 'user', 'wins', 'draws', 'losses', 'matches', 'points', 'coefficient']
   end
   
   def matches
