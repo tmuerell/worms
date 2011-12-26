@@ -46,3 +46,8 @@ module Worms
     config.assets.version = '1.0'
   end
 end
+
+if defined? IRB
+  Object.send(:remove_const, :IRB)
+  IRB = Pry
+end

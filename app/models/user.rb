@@ -7,12 +7,19 @@ class User < ActiveRecord::Base
   has_many :attendances
   has_many :matches, :through => :attendances
   
-  def ranking(limit = Date.today)
-    r = Ranking.new
+  def ranking(league, limit = Date.today)
+    puts league.inspect
+    r = nil
+    if league.version == 1
+      r = Ranking::V1.new
+      r.wins = league.matches.where('date < ?', limit + 1).where(:winner_id => self).count
+      r.draws = league.matches.where('date < ?', limit + 1).where(:winner_id => nil).count
+      r.losses = league.matches.where('date < ?', limit + 1).where('winner_id <> ?', self.id).count
+    else
+      r = Ranking::V2.new
+      r.attendances = league.attendances.where(:user_id => self)
+    end
     r.user = self
-    r.wins = matches.where('date < ?', limit + 1).where(:winner_id => self).count
-    r.draws = matches.where('date < ?', limit + 1).where(:winner_id => nil).count
-    r.losses = matches.where('date < ?', limit + 1).where('winner_id <> ?', self.id).count
     r
   end
   

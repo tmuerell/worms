@@ -10,7 +10,7 @@
 <% @leagues.each do |league| %>
   <tr class="<%= cycle 'odd','even' %>">
     <td><%= link_to league.id, league %></td>
-    <td><%= league.name %></td>
+    <td><%= league.current ? content_tag('b', league.name) : league.name %></td>
     <td><%= link_to 'Edit', edit_league_path(league) %> <%= link_to 'Destroy', league, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

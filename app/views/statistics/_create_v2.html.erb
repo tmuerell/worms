@@ -1,0 +1,23 @@
+<div class="panel sidebar" id="ranking">
+  <h3>Ergebnis eintragen</h3>
+  <div class="panel_contents">
+    <%= form_tag create_result_path do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Platz</th>
+        </tr>
+      <thead>
+      <tbody>
+        <% for u in User.all %>
+          <tr>
+            <td><%= u.firstname %></td>
+            <td><%= select_tag "place[#{u.id}]", options_for_select(["---", 1,2,3,4]) %></td>
+          </tr>
+        <% end %>
+    </table>
+    <%= submit_tag "Eintragen" %>
+    <% end %>
+  </div>
+</div>

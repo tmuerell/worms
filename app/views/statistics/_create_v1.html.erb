@@ -1,0 +1,30 @@
+<div class="panel sidebar" id="ranking">
+  <h3>Ergebnis eintragen</h3>
+  <div class="panel_contents">
+    <%= form_tag create_result_path do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Teiln.</th>
+          <th>Gewinner</th>
+        </tr>
+      <thead>
+      <tbody>
+        <% for u in User.all %>
+          <tr>
+            <td><%= u.firstname %></td>
+            <td><%= check_box_tag 'participated[]', u.id %></td>
+            <td><%= radio_button_tag 'winner', u.id %></td>
+          </tr>
+        <% end %>
+          <tr>
+            <td>Draw</td>
+            <td></td>
+            <td><%= radio_button_tag 'winner', -1 %></td>
+          </tr>
+    </table>
+    <%= submit_tag "Eintragen" %>
+    <% end %>
+  </div>
+</div>

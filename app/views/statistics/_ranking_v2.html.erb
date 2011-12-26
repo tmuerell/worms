@@ -1,0 +1,39 @@
+
+<div class="panel" id="ranking">
+  <h3><%= @league.name %></h3>
+  <div class="panel_contents">
+
+<table cellspacing="0" cellpadding="0" border="0">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Pl.</th>
+      <th>Name</th>
+      <th>Spiele</th>
+      <th>Punkte</th>
+      <th>Koeffizient</th>
+      <th>Erster</th>
+      <th>Zweiter</th>
+      <th>Dritter</th>
+      <th>Vierter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for r in @league.rankings %>
+    <tr class="odd">
+      <td><%= show_trend(r) %></td>
+      <td><%= r.place %>.</td>
+      <td><%= r.user.firstname %></td>
+      <td><%= r.matches %></td>
+      <td><%= r.points %></td>
+      <td><%= "%.4f" % r.coefficient %></td>
+      <td><%= r.first %></td>
+      <td><%= r.second %></td>
+      <td><%= r.third %></td>
+      <td><%= r.fourth %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>
+</div>
