@@ -19,12 +19,18 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe MatchesController do
+  include Devise::TestHelpers
+
+  before(:each) do 
+    @user = Factory.create(:user, :role => 'admin')
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Match. As you add validations to Match, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    FactoryGirl.build(:match).attributes.symbolize_keys
   end
 
   describe "GET index" do

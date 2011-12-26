@@ -19,19 +19,25 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe UsersController do
+  include Devise::TestHelpers
+
+  before(:each) do 
+    @user = Factory.create(:user, :role => 'admin')
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    FactoryGirl.build(:user).attributes.merge({:password => 'secret', :password_confirmation => 'secret'}).symbolize_keys
   end
 
   describe "GET index" do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index
-      assigns(:users).should eq([user])
+      assigns(:users).should eq([@user, user])
     end
   end
 

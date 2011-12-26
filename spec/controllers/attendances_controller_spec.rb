@@ -19,12 +19,18 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe AttendancesController do
+  include Devise::TestHelpers
+
+  before(:each) do 
+    @user = Factory.create(:user, :role => 'admin')
+    sign_in @user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Attendance. As you add validations to Attendance, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    Factory.build(:attendance).attributes.symbolize_keys
   end
 
   describe "GET index" do

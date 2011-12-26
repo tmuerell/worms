@@ -13,8 +13,7 @@ describe "matches/new.html.erb" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => matches_path, :method => "post" do
-      assert_select "input#match_league_id", :name => "match[league_id]"
-      assert_select "input#match_created_by", :name => "match[created_by]"
+      assert_select "select#match_league_id", :name => "match[league_id]"
     end
   end
 end
