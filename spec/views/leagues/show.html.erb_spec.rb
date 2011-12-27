@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe "leagues/show.html.erb" do
   before(:each) do
-    @league = assign(:league, stub_model(League,
-      :name => "Name"
-    ))
+    @league = assign(:league, Factory.create(:league))
   end
 
   it "renders attributes in <p>" do

@@ -1,9 +1,11 @@
+<% if @league %>
 <% title 'Tabelle' %>
 
 <%= render "ranking_v#{@league.version}" %>
 
-<% if user_signed_in? %>
-<% content_for(:sidebar) do %>
-<%= render "create_v#{@league.version}" %>
-<% end %>
+  <% if user_signed_in? %>
+    <% content_for(:sidebar) do %>
+    <%= render "create_v#{@league.version}" %>
+    <% end %>
+  <% end %>
 <% end %>

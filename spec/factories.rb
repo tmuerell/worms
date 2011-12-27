@@ -9,6 +9,7 @@ end
 Factory.define :league do |l|
   l.sequence(:name) { |n| "League #{n}" }
   l.current false
+  l.version 1
 end
 
 Factory.define :match do |m|
