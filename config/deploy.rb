@@ -2,6 +2,7 @@ $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
 require 'bundler/capistrano'
 set :rvm_ruby_string, '1.9.2'        # Or whatever env you want it to run in.
+set :rvm_bin_path, '/usr/local/bin'
 
 set :application, "worms"
 set :repository,  "ssh://muerell.de/var/git/repos/worms.git"
@@ -26,3 +27,7 @@ namespace :deploy do
 end
 
 before "deploy:assets:precompile", "bundle:install"
+
+set :default_environment, {
+  'LANG' => 'de_DE.UTF-8'
+}
