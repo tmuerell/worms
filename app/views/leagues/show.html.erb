@@ -2,7 +2,9 @@
 
 <%= render "statistics/ranking_v#{@league.version}" %>
 
-<% action_item(link_to 'Liga bearbeiten', edit_league_path(@league))%>
-<% action_item(link_to 'Liga löschen', @league, confirm: 'Are you sure?', method: :delete)%>
+<% if user_signed_in? && has_role?('admin') %>
+  <% action_item(link_to 'Liga bearbeiten', edit_league_path(@league))%>
+  <% action_item(link_to 'Liga löschen', @league, confirm: 'Are you sure?', method: :delete)%>
 
-<% breadcrump(link_to 'Ligen', leagues_path)%>
+  <% breadcrump(link_to 'Ligen', leagues_path)%>
+<% end %>

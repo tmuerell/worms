@@ -9,3 +9,14 @@
     <% end %>
   <% end %>
 <% end %>
+
+
+<div class="panel" id="ranking">
+  <h3>History</h3>
+  <div class="panel_contents">
+    
+    <% League.where(:current => false).each do |l| %>
+      <p><%= link_to l.name, l, :style => 'color: #333;' %></p>
+    <% end %>
+  </div>
+</div>
