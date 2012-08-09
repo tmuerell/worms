@@ -13,7 +13,7 @@
         <% for u in User.all %>
           <tr>
             <td><%= u.firstname %></td>
-            <td><%= select_tag "place[#{u.id}]", options_for_select(["---", 1,2,3,4]) %></td>
+            <td><%= select_tag "place[#{u.id}]", options_for_select([["---", "---"], ["Gold", 1],["Silber", 2],["Bronze", 3],["Pech", 4]]) %></td>
           </tr>
         <% end %>
     </table>
