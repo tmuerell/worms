@@ -16,6 +16,7 @@ group :production do
 end
 
 gem 'jquery-rails'
+gem 'rvm-capistrano'
 gem 'capistrano'
 gem 'formtastic'
 
